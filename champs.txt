@@ -1,0 +1,15 @@
+     1	code_commune_INSEE
+     2	nom_commune_postal
+     3	code_postal
+     4	libelle_acheminement
+     5	ligne_5
+     6	latitude
+     7	longitude
+     8	code_commune
+     9	article
+    10	nom_commune
+    11	nom_commune_complet
+    12	code_departement
+    13	nom_departement
+    14	code_region
+    15	nom_region
