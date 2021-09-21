@@ -2,6 +2,7 @@
 #define CSV_H
 
 typedef struct csv_file{
+    FILE *fcsv;
     bool is_open;
     bool read_header;
     int line_counter;
