@@ -26,6 +26,7 @@ int main( void )
 
       printFieldmaxCSV(&csv);
       printf("\n");
+      printRecordCSV(&csv);
 
       closeCSV(&csv);
    }
