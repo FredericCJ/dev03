@@ -33,7 +33,6 @@ int getRecordCSV(csv_file *csv){
 }
 
 int printRecordCSV(csv_file *csv){
-    printf("%d",csv->line_counter);
     return EXIT_SUCCESS;
 }
 
