@@ -10,7 +10,7 @@ int main( void )
    csv_file csv;
 
    openCSV(&csv);
-   csv.read_header = true;   
+   csv.read_header = true;
 
    if (csv.is_open) {
       while ( getRecordCSV(&csv) ) {

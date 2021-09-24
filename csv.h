@@ -1,12 +1,13 @@
-#include <stdbool.h>
-
 #ifndef CSV_H
 #define CSV_H
+
+#include <stdbool.h>
 
 typedef struct csv_file{
     FILE *fcsv;
     bool is_open;
     bool read_header;
+    int fieldcnter;
     int line_counter;
     int max_len;
 } csv_file;
