@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-W -Wall -pedantic -std=c17 -Os
-LDFLAGS=-pg -g
+LDFLAGS=-g
 EXEC=sujet.elf
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)

@@ -27,7 +27,7 @@ int getRecordCSV(csv_file *csv){
         line_len++;
         field_len++;
         
-        if(c == ',' || c == '\n'){
+        if(c == CSV_DELIM || c == '\n'){
             if(field_len-1 >= csv->fields_maxlen[field_num])
                 csv->fields_maxlen[field_num] = field_len-1;
             csv->record[field_num][field_pos] = '\0';
@@ -42,9 +42,9 @@ int getRecordCSV(csv_file *csv){
                 return EXIT_SUCCESS;
             }
         }
-        if(c != ','){
-        csv->record[field_num][field_pos] = c;
-        field_pos++;
+        if(c != CSV_DELIM){
+            csv->record[field_num][field_pos] = c;
+            field_pos++;
         }
     }
     return EXIT_FAILURE;
@@ -58,7 +58,12 @@ int printRecordCSV(csv_file *csv){
             printf("%c",csv->header[i][j]);
             j++;
         }
-        printf(" : ");
+        putchar(':');
+        while(j < 22){
+            putchar('-');
+            j++;
+        }
+        putchar(':');
         while(csv->record[i][k] != '\0'){
             printf("%c",csv->record[i][k]);
             k++;
@@ -108,12 +113,12 @@ int getHeader(csv_file *csv){
     if(csv->read_header == true){
         while(c != '\n'){
             c = fgetc(csv->fcsv);
-            if(c == ',' || c == '\n'){
+            if(c == CSV_DELIM || c == '\n'){
                 csv->header[field_num][field_pos] = '\0';
                 field_num++;
                 field_pos = 0;
             }
-            if(c != ','){
+            if(c != CSV_DELIM){
                 csv->header[field_num][field_pos] = c;
                 field_pos++;
             }
