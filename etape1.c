@@ -13,7 +13,7 @@ int main( void )
    csv.read_header = true;
 
    if (csv.is_open) {
-      while ( getRecordCSV(&csv) ) {
+      while ( getRecordCSV(&csv) == 0 ) {
 
             if ((csv.line_counter > 0) && (csv.line_counter <= 3)) {
                printRecordCSV(&csv);
@@ -26,7 +26,6 @@ int main( void )
 
       printFieldmaxCSV(&csv);
       printf("\n");
-      printRecordCSV(&csv);
 
       closeCSV(&csv);
    }

@@ -9,9 +9,10 @@ typedef struct csv_file{
     bool read_header;
     int line_counter; 
     int max_len; //inclu '\n'
-    int max_field; // inclu ','
 
-    char header[15][46];
+    char fields_maxlen[CSV_FIELDCNT];
+    char header[CSV_FIELDCNT][46];
+    char record[CSV_FIELDCNT][46];
 } csv_file;
 
 int openCSV(csv_file *csv);
@@ -19,7 +20,6 @@ int getRecordCSV(csv_file *csv);
 int printRecordCSV(csv_file *csv);
 int printFieldmaxCSV(csv_file *csv);
 int closeCSV(csv_file *csv);
-int getMaxima(csv_file *csv);
 int getHeader(csv_file *csv);
 
 #endif
