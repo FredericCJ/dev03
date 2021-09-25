@@ -4,6 +4,8 @@
 #include "csv.h"
 
 int openCSV(csv_file *csv){
+    if(csv->is_open == true)
+        return EXIT_FAILURE;
     csv->fcsv = fopen(CSV_FILENAME,"r");
     csv->is_open = true;
     csv->line_counter = 0;
