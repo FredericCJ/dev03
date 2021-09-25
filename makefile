@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-W -Wall -pedantic -std=c17 -Os -g
-LDFLAGS=
+CFLAGS=-W -Wall -pedantic -std=c17 -Os
+LDFLAGS=-pg -g
 EXEC=sujet.elf
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)
@@ -18,7 +18,7 @@ etape1.o: csv.h
 .PHONY: clean mrproper
 
 clean:
-	@rm -rf *.o
+	@rm -rf *.o *.out
 
 mrproper: clean
 	@rm -rf $(EXEC)
