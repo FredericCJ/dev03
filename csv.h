@@ -11,8 +11,8 @@ typedef struct csv_file{
     int max_len; //inclu '\n'
 
     char fields_maxlen[CSV_FIELDCNT];
-    char header[CSV_FIELDCNT][46];
-    char record[CSV_FIELDCNT][46];
+    char header[CSV_FIELDCNT][50];
+    char record[CSV_FIELDCNT][50];
 } csv_file;
 
 int openCSV(csv_file *csv);

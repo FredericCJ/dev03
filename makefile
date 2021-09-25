@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-W -Wall -pedantic -std=c17 -Os
+CFLAGS=-W -Wall -pedantic -std=c17 -Os -g
 LDFLAGS=
 EXEC=sujet.elf
 SRC= $(wildcard *.c)

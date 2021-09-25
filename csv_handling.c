@@ -18,6 +18,7 @@ int getRecordCSV(csv_file *csv){
     int line_len = 0;
     int field_len = 0;
     int field_num = 0;
+    int field_pos = 0;
     
     getHeader(csv);
     
@@ -29,16 +30,21 @@ int getRecordCSV(csv_file *csv){
         if(c == ',' || c == '\n'){
             if(field_len-1 >= csv->fields_maxlen[field_num])
                 csv->fields_maxlen[field_num] = field_len-1;
+            csv->record[field_num][field_pos] = '\0';
             field_num++;
             field_len = 0;
-        }
+            field_pos = 0;
         
-        if(c == '\n'){
-            csv->line_counter++;
-            if(line_len >= csv->max_len)
-                csv->max_len = line_len;
-            line_len = 0;
-            return EXIT_SUCCESS;
+            if(c == '\n'){
+                csv->line_counter++;
+                if(line_len >= csv->max_len)
+                    csv->max_len = line_len;
+                return EXIT_SUCCESS;
+            }
+        }
+        if(c != ','){
+        csv->record[field_num][field_pos] = c;
+        field_pos++;
         }
     }
     return EXIT_FAILURE;
@@ -46,11 +52,18 @@ int getRecordCSV(csv_file *csv){
 
 int printRecordCSV(csv_file *csv){
     int j = 0;
+    int k = 0;
     for(int i=0 ; i<CSV_FIELDCNT ; i++){
         while(csv->header[i][j] != '\0'){
             printf("%c",csv->header[i][j]);
             j++;
         }
+        printf(" : ");
+        while(csv->record[i][k] != '\0'){
+            printf("%c",csv->record[i][k]);
+            k++;
+        }
+        k = 0;
         j = 0;
         printf("\n");
     }
