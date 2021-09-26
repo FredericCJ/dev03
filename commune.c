@@ -3,6 +3,13 @@
 #include "commune.h"
 #include "config.h"
 
+int commune_init(commune_info *commune){
+    commune->nom_commune[0] = '\0';
+    commune->latitude = 0;
+    commune->longitude = 0;
+    return EXIT_SUCCESS;
+}
+
 int record_cnt(csv_file *csv){
     int nb_records = 0;
 

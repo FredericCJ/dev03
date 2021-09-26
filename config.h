@@ -4,7 +4,7 @@
 
 #define CSV_FILENAME        "communes.csv"
 #define CSV_DELIM           ','
-#define CSV_BUFFER_SIZE     512                 // Doit etre parametré sur la plus grande ligne
+#define CSV_BUFFER_SIZE     267
 #define CSV_FIELDCNT        15
 
 #define COMMUNE_MAXLEN          50
