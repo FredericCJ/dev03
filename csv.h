@@ -2,6 +2,8 @@
 #define CSV_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include "config.h"
 
 typedef struct csv_file{
     FILE *fcsv;

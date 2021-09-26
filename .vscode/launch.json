@@ -8,7 +8,7 @@
             "name": "gcc-9 - Générer et déboguer le fichier actif",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/fred/fabrice/dev03/sujet.elf",
+            "program": "/home/fred/fabrice/dev03/etape2",
             "args": [],
             "stopAtEntry": true,
             "cwd": "/home/fred/fabrice/dev03",

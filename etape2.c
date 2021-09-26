@@ -2,20 +2,12 @@
 #include<stdlib.h>
 #include "config.h"
 #include "csv.h"
+#include "commune.h"
 
 int main(){
     csv_file csv;
-    openCSV(&csv);
-    csv.read_header = true;
-    if (csv.is_open) {
-        while ( getRecordCSV(&csv) == 0 ) {
-
-            if ((csv.line_counter > 0) && (csv.line_counter <= 3)) {
-               printRecordCSV(&csv);
-               printf("\n");
-            }
-        }
-    }
-    closeCSV(&csv);
+    int nb_records;
+    nb_records = record_cnt(&csv);
+    printf("%6d champs\n%6d valeures\n%6d champs vides\n",CSV_FIELDCNT*csv.line_counter,nb_records,CSV_FIELDCNT*csv.line_counter-nb_records);
     return EXIT_SUCCESS;
 }
