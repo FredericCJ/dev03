@@ -22,31 +22,37 @@ int getRecordCSV(csv_file *csv){
     int field_num = 0;
     int field_pos = 0;
     
-    getHeader(csv);
+    if(csv->read_header == true)
+        getHeader(csv);
     
     while(c != EOF){
         c = fgetc(csv->fcsv);
         line_len++;
         field_len++;
         
-        if(c == CSV_DELIM || c == '\n'){
-            if(field_len-1 >= csv->fields_maxlen[field_num])
-                csv->fields_maxlen[field_num] = field_len-1;
-            csv->record[field_num][field_pos] = '\0';
-            field_num++;
-            field_len = 0;
-            field_pos = 0;
-        
-            if(c == '\n'){
+        switch(c){
+            case '\n':
+                if(field_len-1 >= csv->fields_maxlen[field_num])
+                    csv->fields_maxlen[field_num] = field_len-1;
+                csv->record[field_num][field_pos] = '\0';
+                field_len = 0;
                 csv->line_counter++;
                 if(line_len >= csv->max_len)
                     csv->max_len = line_len;
                 return EXIT_SUCCESS;
-            }
-        }
-        if(c != CSV_DELIM){
-            csv->record[field_num][field_pos] = c;
-            field_pos++;
+            
+            case CSV_DELIM:
+                if(field_len-1 >= csv->fields_maxlen[field_num])
+                    csv->fields_maxlen[field_num] = field_len-1;
+                csv->record[field_num][field_pos] = '\0';
+                field_num++;
+                field_len = 0;
+                field_pos = 0;
+                break;
+            
+            default:
+                csv->record[field_num][field_pos] = c;
+                field_pos++;
         }
     }
     return EXIT_FAILURE;
@@ -111,21 +117,26 @@ int getHeader(csv_file *csv){
     char c = '\0';
     int field_pos = 0;
     int field_num = 0;
+    while(c != EOF){
 
-    if(csv->read_header == true){
-        while(c != '\n'){
-            c = fgetc(csv->fcsv);
-            if(c == CSV_DELIM || c == '\n'){
+        c = fgetc(csv->fcsv);
+
+        switch(c){
+            case '\n':
+                csv->header[field_num][field_pos] = '\0';
+                csv->read_header = false;
+                return EXIT_SUCCESS;
+            
+            case CSV_DELIM:
                 csv->header[field_num][field_pos] = '\0';
                 field_num++;
                 field_pos = 0;
-            }
-            if(c != CSV_DELIM){
+                break;
+            
+            default:
                 csv->header[field_num][field_pos] = c;
                 field_pos++;
-            }
         }
-        csv->read_header = false;
     }
-    return EXIT_SUCCESS;
+    return EXIT_FAILURE;
 }

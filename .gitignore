@@ -2,3 +2,4 @@
 *.o
 *.out
 etape[1-4]
+dump.txt
