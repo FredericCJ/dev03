@@ -6,12 +6,15 @@
 
 int main(){
     csv_file csv;
-    commune_info commune; 
-    int nb_records;
+    commune_info commune;
 
     commune_init(&commune);
 
-    nb_records = record_cnt(&csv);
-    printf("%6d champs\n%6d valeures\n%6d champs vides\n",CSV_FIELDCNT*csv.line_counter,nb_records,CSV_FIELDCNT*csv.line_counter-nb_records);
+    record_cnt(&csv,&commune);
+    printf("%6d champs\n%6d valeures\n%6d champs vides\n",
+        CSV_FIELDCNT*csv.line_counter,
+        commune.nb_valeures,
+        CSV_FIELDCNT*csv.line_counter-commune.nb_valeures);
+
     return EXIT_SUCCESS;
 }
