@@ -11,9 +11,11 @@ int commune_init(commune_info *commune){
 }
 
 int valid_record(csv_file *csv){
+    int nb_valid = 0;
         for(int i=0 ; i<CSV_FIELDCNT ; i++){
-            if(csv->record[i][0] != '\0')
-                return 1;
+            if(csv->record[i][0] != '\0'){
+                nb_valid++;
+            }
         }
-    return 0;
+    return nb_valid;
 }
