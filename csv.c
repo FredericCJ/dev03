@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 #include "config.h"
 #include "csv.h"
 
 int openCSV(csv_file *csv){
     if(csv->is_open == true)
         return EXIT_FAILURE;
-    csv->fcsv = fopen(CSV_FILENAME,"r");
+    if((csv->fcsv = fopen(CSV_FILENAME,"r")) == NULL){
+        fprintf(stderr, "Couldn't open %s: %s\n", CSV_FILENAME, strerror(errno));
+        return EXIT_FAILURE;
+    }
     csv->is_open = true;
     csv->line_counter = 0;
     csv->max_len = 0;
