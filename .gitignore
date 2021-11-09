@@ -1,3 +1,4 @@
+*.csv
 *.elf
 *.o
 *.out
