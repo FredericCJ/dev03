@@ -38,9 +38,9 @@ int getRecordCSV(csv_file *csv){
         if(state == OUT_OF_FIELD){
             if(c == CSV_DELIM)
                 state = ON_CSV_DELIM;
-            if(c == '\n')
+            else if(c == '\n')
                 state = ON_EOL;
-            if(c == '"'){
+            else if(c == '"'){
                 state = QUOTED_FIELD;
                 c=fgetc(csv->fcsv);
             }
@@ -61,7 +61,7 @@ int getRecordCSV(csv_file *csv){
         if(state == UNQUOTED_FIELD){
             if(c == CSV_DELIM)
                 state = ON_CSV_DELIM;
-            if(c == '\n')
+            else if(c == '\n')
                 state = ON_EOL; 
             else{
                 csv->record[field_num][field_pos] = c;
@@ -164,9 +164,9 @@ int getHeader(csv_file *csv){
         if(state == OUT_OF_FIELD){
             if(c == CSV_DELIM)
                 state = ON_CSV_DELIM;
-            if(c == '\n')
+            else if(c == '\n')
                 state = ON_EOL;
-            if(c == '"'){
+            else if(c == '"'){
                 state = QUOTED_FIELD;
                 c=fgetc(csv->fcsv);
             }
@@ -187,7 +187,7 @@ int getHeader(csv_file *csv){
         if(state == UNQUOTED_FIELD){
             if(c == CSV_DELIM)
                 state = ON_CSV_DELIM;
-            if(c == '\n')
+            else if(c == '\n')
                 state = ON_EOL;
             else{
                 csv->header[field_num][field_pos] = c;
