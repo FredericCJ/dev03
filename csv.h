@@ -3,6 +3,10 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
 #include "config.h"
 
 typedef struct csv_file{
@@ -13,8 +17,8 @@ typedef struct csv_file{
     int max_len; //inclu '\n'
 
     char fields_maxlen[CSV_FIELDCNT];
-    char header[CSV_FIELDCNT][50];
-    char record[CSV_FIELDCNT][50];
+    char header[CSV_FIELDCNT][256];
+    char record[CSV_FIELDCNT][256];
 } csv_file;
 
 int openCSV(csv_file *csv);
