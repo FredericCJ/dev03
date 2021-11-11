@@ -3,8 +3,6 @@
 #include "commune.h"
 #include "config.h"
 
-#define GPS_VALID(x) ((x>=-180.0) && (x<=180.0))
-
 int commune_init(commune_info *commune){
     commune->nom_commune[0] = '\0';
     commune->latitude = 0;

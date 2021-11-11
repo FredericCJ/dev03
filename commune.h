@@ -1,6 +1,8 @@
 #ifndef COMMUNE_H
 #define COMMUNE_H
 
+#define GPS_VALID(x) ((x>=-180.0) && (x<=180.0))
+
 #include "csv.h"
 
 typedef struct commune_info{
