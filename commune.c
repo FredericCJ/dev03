@@ -12,16 +12,6 @@ int commune_init(commune_info *commune){
     return EXIT_SUCCESS;
 }
 
-int non_empty_field(csv_file *csv){
-    int non_empty_field = 0;
-        for(int i=0 ; i<CSV_FIELDCNT ; i++){
-            if(csv->record[i][0] != '\0'){
-                non_empty_field++;
-            }
-        }
-    return non_empty_field;
-}
-
 bool valid_gps(csv_file *csv, commune_info *commune){
 
     if(strcmp(csv->record[5],"") != 0)
