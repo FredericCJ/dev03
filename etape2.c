@@ -1,30 +1,38 @@
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "config.h"
 #include "csv.h"
 #include "commune.h"
 
+
+
 int main(){
     csv_file csv;
     commune_info commune;
-    int nb_valeures = 0;
+    int nb_record_with_valid_gps = 0;
 
     commune_init(&commune);
-    openCSV(&csv);
+    if(openCSV(&csv) !=0)
+        exit(1);
     csv.read_header = true;
     
     if(csv.is_open){
         while(getRecordCSV(&csv) == 0 && csv.read_header == false){
-            nb_valeures = nb_valeures+valid_record(&csv);
+            if(valid_gps(&csv, &commune) == true){
+                nb_record_with_valid_gps++;
+            }
         }    
     }
 
-    closeCSV(&csv);
+    if(closeCSV(&csv) != 0)
+        exit(1);
 
-    printf("%6d champs\n%6d valeures\n%6d champs vides\n",
-        CSV_FIELDCNT*csv.line_counter,
-        nb_valeures,
-        CSV_FIELDCNT*csv.line_counter-nb_valeures);
+    printf("%48s %6d\n%48s %6d\n",
+        "Nombre total d'enregistrements:--------------------:",
+        csv.line_counter,
+        "Enregistrements avec des coordonnées gps valides:--:",
+        nb_record_with_valid_gps);
 
     return EXIT_SUCCESS;
 }

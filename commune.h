@@ -9,7 +9,7 @@ typedef struct commune_info{
     double longitude;
 }commune_info;
 
-int valid_record(csv_file *csv);
 int commune_init(commune_info *commune);
+bool valid_gps(csv_file *csv, commune_info *commune);
 
 #endif

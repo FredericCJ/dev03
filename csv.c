@@ -122,11 +122,11 @@ int printRecordCSV(csv_file *csv){
 
 int printFieldmaxCSV(csv_file *csv){
     int j = 0;
-    printf("+--------------------------------------+\n");
-    printf("| Nom champ               | Taille max |\n");
-    printf("|--------------------------------------|\n");
+    printf("+---------------------------------------------+\n");
+    printf("| index |Nom champ               | Taille max |\n");
+    printf("|---------------------------------------------|\n");
     for(int i=0 ; i<CSV_FIELDCNT ; i++){
-        printf("| ");
+        printf("|  %3d  |",i);
         while(csv->header[i][j] != '\0'){
             printf("%c",csv->header[i][j]);
             j++;
@@ -139,13 +139,17 @@ int printFieldmaxCSV(csv_file *csv){
         j = 0;
         printf("\n");
     }
-    printf("+--------------------------------------+\n");
+    printf("+---------------------------------------------+\n");
     return EXIT_SUCCESS;
 }
 
 int closeCSV(csv_file *csv){
+    if(csv->is_open == false){
+        fprintf(stderr,"No file has been opened");
+        return EXIT_FAILURE;
+    }
     if(fclose(csv->fcsv) == EOF){
-        fprintf(stderr, "Couldn't close %s: %s\n", CSV_FILENAME, strerror(errno));
+        fprintf(stderr,"Couldn't close %s: %s\n", CSV_FILENAME, strerror(errno));
         return EXIT_FAILURE;
     }
     csv->is_open = false;
