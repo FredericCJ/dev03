@@ -12,7 +12,7 @@ int commune_init(commune_info *commune){
     return EXIT_SUCCESS;
 }
 
-bool valid_gps(csv_file *csv, commune_info *commune){
+bool valid_commune(csv_file *csv, commune_info *commune){
 
     if(strcmp(csv->record[5],"") != 0)
         commune->latitude = atof(csv->record[5]);

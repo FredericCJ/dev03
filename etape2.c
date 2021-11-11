@@ -19,7 +19,7 @@ int main(){
     
     if(csv.is_open){
         while(getRecordCSV(&csv) == 0 && csv.read_header == false){
-            if(valid_gps(&csv, &commune) == true){
+            if(valid_commune(&csv, &commune) == true){
                 nb_record_with_valid_gps++;
             }
         }    

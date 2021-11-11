@@ -10,6 +10,6 @@ typedef struct commune_info{
 }commune_info;
 
 int commune_init(commune_info *commune);
-bool valid_gps(csv_file *csv, commune_info *commune);
+bool valid_commune(csv_file *csv, commune_info *commune);
 
 #endif

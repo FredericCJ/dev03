@@ -1,7 +1,7 @@
 CC=gcc
-CFLAGS=-W -Wall -pedantic -std=c17 -Os
+CFLAGS=-W -Wall -pedantic -std=c17 -g
 LDFLAGS=-g
-EXEC=etape1 etape2
+EXEC=etape1 etape2 etape3
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)
 
@@ -13,6 +13,9 @@ etape1: etape1.o csv.o
 etape2: etape2.o csv.o commune.o
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
+etape3: etape3.o
+	@$(CC) -o $@ $^ $(LDFLAGS)
+	
 etape1.o: csv.h config.h
 etape2.o: csv.h config.h
 csv.o: csv.h config.h
