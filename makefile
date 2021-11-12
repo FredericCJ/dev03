@@ -1,4 +1,4 @@
-CC=gcc
+CC=clang
 CFLAGS=-W -Wall -pedantic -std=c17 -g
 LDFLAGS=-g
 EXEC=etape1 etape2 etape3
@@ -31,3 +31,4 @@ clean:
 
 mrproper: clean
 	@rm -rf $(EXEC)
+	

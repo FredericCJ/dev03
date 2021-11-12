@@ -13,10 +13,6 @@ bool is_number(char *parameter);
 int main(int argc, char *argv[]){
     double longitude, latitude, distance;
 
-    latitude = atof(argv[1]);
-    longitude = atof(argv[2]);
-    distance = atof(argv[3]);
-
     if(argc < 4){
         fprintf(stderr,"%s: too few arguments\n\n",argv[0]);
         fprintf(stdout,"Usage:\n\t%s <latitude> <longitude> <distance>\n",argv[0]);
@@ -27,6 +23,11 @@ int main(int argc, char *argv[]){
         fprintf(stdout,"Usage:\n\t%s <latitude> <longitude> <distance>\n",argv[0]);
         exit(2);
     }
+    
+    latitude = atof(argv[1]);
+    longitude = atof(argv[2]);
+    distance = atof(argv[3]);
+
     if((is_number(argv[1]) == false) || !GPS_VALID(latitude)){
         fprintf(stderr,"invalid argument <latitude>\n\n");
         fprintf(stdout,"Usage:\n\t%s: latitude must be a number in [-180.0 ; 180.0]\n",argv[0]);
