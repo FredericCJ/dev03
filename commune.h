@@ -7,6 +7,7 @@
 
 typedef struct commune_info{
     char nom_commune[COMMUNE_MAXLEN];
+    char ligne_5[LIGNE_5_MAXLEN];
     double latitude;
     double longitude;
 }commune_info;

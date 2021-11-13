@@ -24,6 +24,7 @@ bool valid_commune(csv_file *csv, commune_info *commune){
 
     if(GPS_VALID(commune->latitude) && GPS_VALID(commune->longitude)){
         strcpy(commune->nom_commune,csv->record[10]);
+        strcpy(commune->ligne_5,csv->record[4]);
         return true;
     }
     return false;

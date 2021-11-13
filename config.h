@@ -14,7 +14,7 @@
 #define ON_EOL              4
 
 #define COMMUNE_MAXLEN          50
-#define COMMUNE_CHAMP_NOM       50
+#define LIGNE_5_MAXLEN          50
 #define COMMUNE_CHAMP_LATITUDE  14
 #define COMMUNE_CHAMP_LONGITUDE 18
 

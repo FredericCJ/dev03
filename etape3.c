@@ -70,8 +70,8 @@ int print_communes_within_range(commune_info *commune, double latitude_ref, doub
     csv.read_header = true;
 
     while(getRecordCSV(&csv) == 0){
-        if((valid_commune(&csv, commune) == true) && ((distance_to = distance_to_reference(commune, latitude_ref, longitude_ref)) < distance)){
-            printf("%-45s\t%12f km\n",commune->nom_commune,distance_to);
+        if((valid_commune(&csv, commune) == true) && ((distance_to = distance_to_reference(commune, latitude_ref, longitude_ref)) <= distance)){
+            printf("%-45s\t%-33s\t%12f km\n",commune->nom_commune,commune->ligne_5,distance_to);
         }
     }
 
