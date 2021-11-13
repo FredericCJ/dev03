@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <regex.h>
-#include <math.h>
 #include "etape3.h"
 
 int main(int argc, char *argv[]){
