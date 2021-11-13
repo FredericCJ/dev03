@@ -13,9 +13,9 @@ etape1: etape1.o csv.o
 etape2: etape2.o csv.o commune.o
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
-etape3: etape3.o
-	@$(CC) -o $@ $^ $(LDFLAGS)
-	
+etape3: etape3.o csv.o commune.o
+	@$(CC) -o $@ $^ $(LDFLAGS) -lm
+
 %.o: %.c
 	@$(CC) -o $@ -c $< $(CFLAGS)
 

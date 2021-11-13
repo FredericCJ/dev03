@@ -2,16 +2,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <regex.h>
-#include "config.h"
-#include "csv.h"
-#include "commune.h"
-
-#define DISTANCE_VALID(x) ((x>=0.0) && (x<=19999.0))
-
-bool is_number(char *parameter);
+#include <math.h>
+#include "etape3.h"
 
 int main(int argc, char *argv[]){
     double longitude, latitude, distance;
+    commune_info commune;
 
     if(argc < 4){
         fprintf(stderr,"%s: too few arguments\n\n",argv[0]);
@@ -23,7 +19,7 @@ int main(int argc, char *argv[]){
         fprintf(stdout,"Usage:\n\t%s <latitude> <longitude> <distance>\n",argv[0]);
         exit(2);
     }
-    
+
     latitude = atof(argv[1]);
     longitude = atof(argv[2]);
     distance = atof(argv[3]);
@@ -44,7 +40,8 @@ int main(int argc, char *argv[]){
         exit(5);
     }
 
-    printf("latitude : %f\nlongitude : %f\ndistance : %f\n",latitude,longitude,distance);
+    if(print_communes_within_range(&commune,latitude,longitude,distance) != 0)
+        exit(6);
     
     return EXIT_SUCCESS;
 }
@@ -61,4 +58,35 @@ bool is_number(char *parameter){
             return true;
         }
     return false;
+}
+
+int print_communes_within_range(commune_info *commune, double latitude_ref, double longitude_ref, double distance){
+    csv_file csv;
+    double distance_to;
+
+    if(openCSV(&csv) != 0)
+        return EXIT_FAILURE;
+    
+    csv.read_header = true;
+
+    while(getRecordCSV(&csv) == 0){
+        if((valid_commune(&csv, commune) == true) && ((distance_to = distance_to_reference(commune, latitude_ref, longitude_ref)) < distance)){
+            printf("%-45s\t%12f km\n",commune->nom_commune,distance_to);
+        }
+    }
+
+    closeCSV(&csv);
+
+    return EXIT_SUCCESS;
+}
+
+double distance_to_reference(commune_info *commune, double latitude_ref, double longitude_ref){
+    double distance;
+    
+    double latitude = commune->latitude;
+    double longitude = commune->longitude;
+
+    distance = acos( sin(RAD(latitude_ref)) * sin(RAD(latitude)) + cos(RAD(latitude_ref)) * cos(RAD(latitude)) * cos(RAD(longitude_ref)-RAD(longitude)) ) * 6371 ;
+
+    return distance;
 }
