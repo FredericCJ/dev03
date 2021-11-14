@@ -37,9 +37,9 @@ main (int argc, char *argv[])
   longitude = atof (argv[2]);
   distance = atof (argv[3]);
 
-  if (((is_number (argv[1]) != 0) || !GPS_VALID (latitude))
-      || ((is_number (argv[2]) != 0) || !GPS_VALID (longitude))
-      || ((is_number (argv[3]) != 0) || !DISTANCE_VALID (distance)))
+  if (((is_number (argv[1]) == false) || !GPS_VALID (latitude))
+      || ((is_number (argv[2]) == false) || !GPS_VALID (longitude))
+      || ((is_number (argv[3]) == false) || !DISTANCE_VALID (distance)))
     {
       errno = EINVAL;
       fprintf (stderr, "%s", usage);
@@ -56,10 +56,10 @@ main (int argc, char *argv[])
 }
 
 /* Checks if the string passed as parameter contains only one real number;
- * returns 0 if string passed as argument contains only one real number;
- * returns EXIT_FAILURE if regex did not compile;
- * returns 2 if regex did not match */
-int
+ * false returns true if string passed as argument contains only one real
+ * number;
+ * returns false if regex did not match */
+bool
 is_number (char *string)
 {
   /* Expression that matches text containing only one real number written like
@@ -78,19 +78,15 @@ is_number (char *string)
   int regex_match_status;
 
   regex_compilation_error = regcomp (&regex, number_pattern, REG_EXTENDED);
-
-  if (regex_compilation_error)
-    {
-      return EXIT_FAILURE;
-    }
+  assert (regex_compilation_error == 0);
 
   regex_match_status = regexec (&regex, string, 0, NULL, 0);
 
   if (regex_match_status == 0)
     {
-      return 0;
+      return true;
     }
-  return 2;
+  return false;
 }
 
 int
