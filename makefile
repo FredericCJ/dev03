@@ -1,5 +1,5 @@
-CC=clang
-CFLAGS=-W -Wall -pedantic -std=c17 -g
+CC=gcc
+CFLAGS=-Wall -Wextra -pedantic -std=c18 -g
 LDFLAGS=-g
 EXEC=etape1 etape2 etape3
 SRC= $(wildcard *.c)
