@@ -55,15 +55,15 @@ main (int argc, char *argv[])
   return EXIT_SUCCESS;
 }
 
-/* Checks if the string passed as parameter contains only one real number;
- * false returns true if string passed as argument contains only one real
- * number;
- * returns false if regex did not match */
+/* Checks if the string passed as parameter is a real number with nothing
+ * aside;
+ * returns true if string passed as argument is a real number;
+ * returns false if not */
 bool
 is_number (char *string)
 {
-  /* Expression that matches text containing only one real number written like
-   * x or x.y or .y */
+  /* Expression that matches only a real number with nothing aside written like
+   * "x" or "x.y" or ".y", with x in Z and y in [0 ; 1] */
   char *number_pattern = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
 
   /* Contains compiled regex */
