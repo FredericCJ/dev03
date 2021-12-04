@@ -3,13 +3,13 @@
 int
 openCSV (csv_file *csv)
 {
+  int err;
   if (csv->is_open == true)
-    return EXIT_FAILURE;
+    return ETXTBSY;
   if ((csv->fcsv = fopen (CSV_FILENAME, "r")) == NULL)
     {
-      fprintf (stderr, "Couldn't open %s: %s\n", CSV_FILENAME,
-               strerror (errno));
-      return EXIT_FAILURE;
+      err = errno;
+      return errno;
     }
   csv->is_open = true;
   csv->line_counter = 0;

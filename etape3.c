@@ -6,6 +6,7 @@ main (int argc, char *argv[])
   double longitude, latitude, distance;
   commune_info commune;
   char *usage;
+  int err;
 
   /* memory allocation of ```char *usage``` to match the lenth of formatted
    * usage message */
@@ -48,9 +49,13 @@ main (int argc, char *argv[])
 
   free (usage);
 
-  if (print_communes_within_range (&commune, latitude, longitude, distance)
+  if ((err
+       = print_communes_within_range (&commune, latitude, longitude, distance))
       != 0)
-    exit (6);
+    {
+      fprintf (stderr, "Couldn't open %s: %s\n", CSV_FILENAME, strerror (err));
+      exit (err);
+    }
 
   return EXIT_SUCCESS;
 }
@@ -62,8 +67,8 @@ main (int argc, char *argv[])
 bool
 is_number (char *string)
 {
-  /* Expression that matches only a real number with nothing aside written like
-   * "x" or "x.y" or ".y", with x in Z and y in [0 ; 1] */
+  /* Expression that matches only a real number without anything beside written
+   * like "x" or "x.y" or ".y", with x in Z| and y in [0 ; 1] */
   char *number_pattern = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
 
   /* Contains compiled regex */
@@ -95,10 +100,11 @@ print_communes_within_range (commune_info *commune, double latitude_ref,
 {
   csv_file csv;
   double distance_to;
+  int err;
 
-  if (openCSV (&csv) != 0)
+  if ((err = openCSV (&csv)) != 0)
     {
-      return EXIT_FAILURE;
+      return err;
     }
 
   csv.read_header = true;

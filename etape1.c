@@ -8,9 +8,14 @@
 int
 main (void)
 {
+  int err;
   csv_file csv;
 
-  openCSV (&csv);
+  if ((err = openCSV (&csv)) != 0)
+    {
+      fprintf (stderr, "Couldn't open %s: %s\n", CSV_FILENAME, strerror (err));
+      exit (err);
+    }
   csv.read_header = true;
 
   if (csv.is_open)
